@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build Production Bundle
+    name: Build & Verify Production Bundle
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
@@ -31,8 +31,19 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Run Test Suite
+        run: npm run test
+
       - name: Compile Production Build
         run: npm run build
+
+      - name: Generate Fresh Resume PDFs
+        run: npm run generate:resumes || true
+
+      - name: Copy Resumes to Dist
+        run: |
+          mkdir -p dist/resumes
+          cp -r public/resumes/* dist/resumes/ || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

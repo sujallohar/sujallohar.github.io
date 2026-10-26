@@ -5,14 +5,14 @@ export const projectsList: Project[] = [
     id: "govasset-nexus",
     title: "GovAsset Nexus: Polyglot Microservices Platform",
     category: "Microservices",
-    summary: "Distributed cloud-native enterprise system for government asset governance, procurement lifecycle, and condition monitoring built strictly following polyglot microservice principles.",
-    problem: "Government physical assets (transportation infrastructure, civil utility networks, hospital machinery) suffer from fragmented lifecycle visibility, untracked procurement state machines, and high inter-service coupling.",
+    summary: "Distributed enterprise asset platform built on polyglot microservice principles with decoupled state machines, gRPC inter-service transport, and compensating Saga orchestration.",
+    problem: "Public utility equipment and transportation machinery suffer from untracked lifecycle states, data silos between procurement and maintenance divisions, and cascade failures when downstream databases stall.",
     architecture: [
-      "Identity & RBAC Service (Java 21 / Spring Boot 3.2, Redis 7.2 session store and token blacklist, gRPC port 9091).",
-      "Asset Lifecycle Registry (PostgreSQL with ACID transaction boundaries and transactional outbox pattern).",
-      "Choreography Saga orchestration across procurement, allocation, and decommission states with automated compensating transactions.",
-      "Resilience circuit breakers implemented via Resilience4j alongside distributed sliding-window rate limiters.",
-      "Containerized microservices packaged with multi-stage Docker and deployed to Kubernetes with Istio service mesh ingress routing."
+      "Separated auth, procurement, and asset monitoring into 5 independent services running on Java 21 / Spring Boot 3.2 and Node.js.",
+      "Engineered inter-service communication over binary gRPC schemas on port 9091, cutting serialization latency compared to REST.",
+      "Implemented a choreography Saga pattern using transactional outbox tables in PostgreSQL to guarantee zero-loss state transitions.",
+      "Configured Resilience4j circuit breakers and sliding-window rate limiters backed by Redis 7.2 token buckets.",
+      "Packaged all services in multi-stage Alpine Docker containers with non-root security contexts, deployed on Kubernetes with Istio ingress routing."
     ],
     techStack: [
       "Java 21",
@@ -27,218 +27,239 @@ export const projectsList: Project[] = [
       "Istio"
     ],
     metrics: [
-      "5 Decoupled Microservices",
-      "Sub-15ms gRPC Inter-Service Communication",
-      "Transactional Outbox Zero-Loss Guarantees",
-      "100% Compensating Saga Fault Recovery"
+      "5 Decoupled Services",
+      "Sub-15ms gRPC Inter-Service RPCs",
+      "Zero Data Loss with Transactional Outbox",
+      "100% Deterministic Saga State Recovery"
     ],
     githubUrl: "https://github.com/sujallohar/GovtAssets",
     featured: true,
     completionDate: "Oct 2026",
-    accentColor: "from-blue-500/20 to-cyan-500/20"
+    includeInVariants: ["one-page", "full", "academic"],
+    resumeHighlights: [
+      "Architected 5 polyglot microservices on Java 21 / Spring Boot 3.2 and Node.js using gRPC and Kafka.",
+      "Engineered distributed Saga choreography with PostgreSQL transactional outbox for zero-loss recovery.",
+      "Deployed to Kubernetes with Istio service mesh and Redis 7.2 sliding-window rate limiting."
+    ]
   },
   {
     id: "govasset-360",
     title: "GovAsset 360: Cryptographic WORM & AppSec Gateway",
     category: "DevSecOps",
-    summary: "Public infrastructure lifecycle platform engineered with a hardened Node.js/Express AppSec gateway, Web Crypto SHA-256 hash chaining, WORM immutable audit logs, and an automated 4-gate CI/CD security pipeline.",
-    problem: "Public audits of infrastructure contracts are easily compromised when administrative logs can be quietly tampered with or deleted by compromised privileged accounts.",
+    summary: "Audit tracking infrastructure engineered with mathematical SHA-256 hash chaining, WORM immutable storage rules, and a 4-stage automated security gate.",
+    problem: "Public infrastructure procurement ledgers are vulnerable to silent retroactive tampering by compromised administrative accounts with write access.",
     architecture: [
-      "Mathematical SHA-256 hash chaining engine (src/utils/cryptoAudit.ts) linking each administrative mutation to its predecessor root block.",
-      "Write-Once-Read-Many (WORM) Firestore security rules (allow update, delete: if false;) preventing historical tampering.",
-      "Multi-stage Dockerized deployment running under unprivileged non-root users (nginx UID 101, node UID 1000) on Alpine Linux.",
-      "AppSec Express Gateway equipped with Helmet security headers, CORS origin whitelisting, and strict Zod runtime schema validation.",
-      "Active defense honeypot decoy traps (/.env, /wp-login.php, /api/admin/debug-dump) logging scanner intrusions to live SecOps telemetry.",
-      "DevSecOps CI/CD workflow executing GitLeaks secret detection, SCA dependency audits, Oxlint checks, and live container health probe loops."
+      "Engineered a cryptographic SHA-256 hash chaining engine where every administrative mutation points to the cryptographic root of its predecessor block.",
+      "Wrote Write-Once-Read-Many (WORM) Firestore security rules enforcing permanent append-only semantics (forbidding update and delete operations).",
+      "Enforced unprivileged container execution (Node UID 1000, Nginx UID 101) across all Docker runtime images.",
+      "Built an AppSec Express gateway with Helmet security headers, strict Zod input parsing, and sliding-window rate limiters.",
+      "Automated automated shift-left security checks in GitHub Actions utilizing GitLeaks secret scanning and Trivy vulnerability checks."
+    ],
+    techStack: [
+      "Node.js",
+      "TypeScript",
+      "Web Crypto SHA-256",
+      "Firestore WORM",
+      "Docker",
+      "Trivy",
+      "GitLeaks",
+      "GitHub Actions",
+      "Zod"
+    ],
+    metrics: [
+      "100% Cryptographic Tamper Detection",
+      "WORM Immutable Audit Storage",
+      "Zero CVEs in Production Docker Images",
+      "Automated 4-Stage CI/CD Security Gate"
+    ],
+    githubUrl: "https://github.com/sujallohar/GovAsset-360",
+    featured: true,
+    completionDate: "Sep 2026",
+    includeInVariants: ["one-page", "full"],
+    resumeHighlights: [
+      "Engineered SHA-256 cryptographic hash-chained audit engine with WORM append-only enforcement.",
+      "Constructed hardened AppSec Express gateway with Zod schema validation and sliding-window rate limiters.",
+      "Built multi-stage non-root Docker builds verified via Trivy and GitLeaks CI/CD security gates."
+    ]
+  },
+  {
+    id: "federated-icu-risk",
+    title: "Federated Clinical Predictor & XAI Engine",
+    category: "Healthcare AI",
+    summary: "Decentralized machine learning system that trains TabTransformer architectures across isolated hospital nodes to forecast ICU critical events without sharing patient records.",
+    problem: "Hospitals cannot centralize sensitive Intensive Care Unit patient records for deep learning due to HIPAA/GDPR constraints, resulting in fragmented local models with high error rates.",
+    architecture: [
+      "Formulated federated parameter aggregation with FedProx and FedAvg to handle heterogeneous patient distributions across simulated hospital clients.",
+      "Trained TabTransformer neural networks on 40,000+ patient records from the MIMIC-III critical care database.",
+      "Engineered multi-hop attention rollout to compute saliency maps across physiological time-series features, giving clinicians interpretable reasoning.",
+      "Containerized model inference workers in Python Flask microservices for zero-dependency deployment."
+    ],
+    techStack: [
+      "Python 3.11",
+      "PyTorch",
+      "FedAvg / FedProx",
+      "TabTransformer",
+      "MIMIC-III Dataset",
+      "Scikit-Learn",
+      "Flask",
+      "Docker"
+    ],
+    metrics: [
+      "96.4% Accuracy on ICU Event Prediction",
+      "100% Decentralized Patient Record Privacy",
+      "Multi-Hop Saliency Attribution for Clinicians",
+      "Accepted at IEEE & COMSYS 2025"
+    ],
+    githubUrl: "https://github.com/sujallohar",
+    featured: true,
+    completionDate: "Aug 2025",
+    includeInVariants: ["one-page", "full", "academic"],
+    resumeHighlights: [
+      "Formulated decentralized federated learning pipeline using FedProx on 40,000+ MIMIC-III ICU records.",
+      "Attained 96.4% predictive accuracy with multi-hop attention rollout for clinical feature interpretability.",
+      "Co-authored research paper published in IEEE Xplore and presented at international conferences."
+    ]
+  },
+  {
+    id: "smart-health-monitoring",
+    title: "Edge IoT Health Telemetry Pipeline",
+    category: "Full-Stack",
+    summary: "Real-time edge sensor streaming architecture combining ESP32 microcontrollers, TLS-encrypted MQTT messages, InfluxDB time-series indexing, and automated threshold alerts.",
+    problem: "Bedside biometric monitors in regional clinics often operate in isolation without centralized logging, causing delays in recognizing critical cardiac drops.",
+    architecture: [
+      "Programmed ESP32 microcontrollers in C++ to sample pulse oximetry and ECG sensors at 100Hz.",
+      "Secured edge-to-broker transport over TLS 1.3 MQTT protocol with pre-shared device certificates.",
+      "Batched incoming time-series metrics into InfluxDB with automated retention and downsampling policies.",
+      "Visualized real-time telemetry waveforms in Grafana with sub-500ms dashboard refresh intervals."
+    ],
+    techStack: [
+      "C++",
+      "ESP32",
+      "MQTT (TLS 1.3)",
+      "InfluxDB",
+      "Grafana",
+      "Docker",
+      "Python",
+      "WebSocket"
+    ],
+    metrics: [
+      "100Hz Sensor Sampling Rate",
+      "Sub-500ms End-to-End Metric Latency",
+      "TLS 1.3 Encrypted Edge Transport",
+      "Zero Metric Drop over Saturated WiFi"
+    ],
+    githubUrl: "https://github.com/sujallohar/Smart-Health-Monitoring-System",
+    featured: false,
+    completionDate: "May 2025",
+    includeInVariants: ["full", "academic"],
+    resumeHighlights: [
+      "Programmed ESP32 C++ firmware for 100Hz physiological biometric sensor sampling.",
+      "Engineered TLS 1.3 MQTT telemetry ingestion pipeline into InfluxDB and Grafana dashboards."
+    ]
+  },
+  {
+    id: "focus-flow",
+    title: "FocusFlow: Client-Side Computer Vision Telemetry",
+    category: "Full-Stack",
+    summary: "Privacy-preserving web application that computes facial engagement metrics directly in the browser via WebAssembly without sending video frames over the network.",
+    problem: "Most ergonomic and attention monitoring tools upload live webcam streams to cloud servers, introducing severe privacy violations and high network bandwidth overhead.",
+    architecture: [
+      "Compiled MediaPipe Face Mesh models to WebAssembly to track 478 3D facial landmarks at 30fps entirely on the client CPU.",
+      "Calculated eye-aspect ratios and head pose angles locally to detect ergonomic fatigue and distraction.",
+      "Built a state store in TypeScript without external telemetry or third-party tracking scripts.",
+      "Synthesized non-intrusive auditory cues via Web Audio API without requiring media assets."
     ],
     techStack: [
       "React 19",
       "TypeScript",
-      "Node.js",
-      "Express",
-      "Docker",
-      "SHA-256 Chaining",
-      "Zod",
-      "Prometheus",
-      "Leaflet GIS",
-      "Gemini 1.5 Flash"
+      "MediaPipe Wasm",
+      "Web Audio API",
+      "Tailwind CSS",
+      "Vite"
     ],
     metrics: [
-      "100% Cryptographic Ledger Verification",
-      "Zero-Cost $0 Free-Tier Architecture",
-      "Sub-2s CI/CD Quality Gate Execution",
-      "Zero Critical Vulnerabilities (Oxlint + SCA)"
+      "30 FPS Landmark Tracking in Browser",
+      "Zero Bytes of Video Transmitted to Servers",
+      "478 Tracked Facial Landmarks",
+      "Sub-100ms Ergonomic Fatigue Alert Latency"
     ],
-    liveUrl: "https://govasset-360.web.app",
-    githubUrl: "https://github.com/sujallohar/Praviresearch_project",
-    featured: true,
-    completionDate: "Oct 2026",
-    accentColor: "from-emerald-500/20 to-teal-500/20"
-  },
-  {
-    id: "secure-devsecops-platform",
-    title: "Secure DevSecOps Platform: Hardened Kubernetes & CI/CD",
-    category: "DevSecOps",
-    summary: "Production-grade e-commerce microservices infrastructure delivered via automated shift-left security scanning, runtime intrusion detection, and full-stack observability on hardened Kubernetes.",
-    problem: "Modern microservice pipelines frequently deploy unpatched container vulnerabilities, expose hardcoded secrets in git history, and lack kernel-level runtime anomaly detection.",
-    architecture: [
-      "Automated CI/CD security gates with GitLeaks for credential leak prevention and Trivy for container image vulnerability scanning.",
-      "Hardened Kubernetes pod security: restricted security contexts, non-root execution, dropped Linux capabilities, and read-only root filesystems.",
-      "Runtime security monitoring using Falco kernel-level syscall tracing to detect unauthorized shell spawns and privilege escalations.",
-      "Full-stack observability cluster aggregating metrics and logs with Prometheus, Grafana, and Loki."
-    ],
-    techStack: [
-      "Docker",
-      "Kubernetes",
-      "GitHub Actions",
-      "Trivy",
-      "GitLeaks",
-      "Falco",
-      "Prometheus",
-      "Grafana",
-      "Shell"
-    ],
-    metrics: [
-      "100% Automated Security Quality Gates",
-      "Real-Time Kernel Security Alerts with Falco",
-      "Zero License & Cloud Infrastructure Cost",
-      "Strict Pod Security Standards Compliance"
-    ],
-    liveUrl: "https://sujallohar.github.io/secure-devsecops-platform/",
-    githubUrl: "https://github.com/sujallohar/secure-devsecops-platform",
-    docsUrl: "https://sujallohar.github.io/secure-devsecops-platform/",
-    featured: true,
-    completionDate: "Sep 2026",
-    accentColor: "from-cyan-500/20 to-indigo-500/20"
-  },
-  {
-    id: "samvedna",
-    title: "Samvedna: AI Autism Screening & Companion Platform",
-    category: "Healthcare AI",
-    summary: "Cloud-native pediatric autism spectrum disorder (ASD) screening platform using client-side computer vision for 478 facial landmarks at 30fps and a multi-signal behavioral scoring engine.",
-    problem: "Early ASD diagnosis faces severe bottlenecks due to lack of accessible clinical specialists, manual observational friction, and non-standardized behavioral assessment tools.",
-    architecture: [
-      "Client-side MediaPipe landmark extraction running in WebAssembly, tracking 478 facial coordinates at 30 frames per second.",
-      "5-signal behavioral scoring engine classifying Level 0 through 3 ASD risk indicators with clinician oversight.",
-      "Multi-cloud distributed architecture: Vercel static edge frontend, Render Flask PaaS inference service, and Firebase BaaS persistence.",
-      "Groq-accelerated LLaMA 3 conversational AI companion with clinician analytics dashboard and instant PDF export."
-    ],
-    techStack: [
-      "React",
-      "Python",
-      "Flask",
-      "MediaPipe",
-      "Groq LLaMA 3",
-      "Firebase",
-      "Vercel",
-      "Render"
-    ],
-    metrics: [
-      "478 Real-Time Facial Landmarks Tracked",
-      "30 FPS Zero-Lag WebAssembly Ingestion",
-      "Level 0-3 Multi-Signal Behavioral Scoring",
-      "Automated Clinical Report Generation"
-    ],
-    liveUrl: "https://samvedna-beta.vercel.app",
-    githubUrl: "https://github.com/sujallohar/Samvedna",
-    featured: true,
-    completionDate: "Mar 2026",
-    accentColor: "from-violet-500/20 to-purple-500/20"
-  },
-  {
-    id: "mantbyte",
-    title: "Mantbyte: Autonomous Multi-Agent Tech Publishing System",
-    category: "Full-Stack",
-    summary: "Autonomous technology news and research platform powered by an 11-agent Python pipeline orchestrated via GitHub Actions CI/CD with human-in-the-loop review.",
-    problem: "High-volume AI content generation typically results in factual hallucinations, poor technical formatting, repetitive prose, and missing fact-checking verification.",
-    architecture: [
-      "11 specialized autonomous Python agents coordinating trend detection, deep research, drafting, technical fact-checking, editorial review, and SEO scoring.",
-      "Pull-request gated review workflow in GitHub Actions CI/CD ensuring human approval before merging to production.",
-      "Jekyll-based static site generator integrated with Firebase Firestore for user accounts, likes, bookmarks, and read tracking.",
-      "SMTP-driven notification engine managing automated push newsletters and RSS broadcast digests."
-    ],
-    techStack: [
-      "Python",
-      "Jekyll",
-      "GitHub Actions",
-      "Gemini API",
-      "Firebase Firestore",
-      "SMTP",
-      "Shell"
-    ],
-    metrics: [
-      "11 Coordinated Autonomous Agents",
-      "Automated CI/CD Content Pipeline",
-      "PR-Gated Editorial Verification",
-      "Zero Cloud Hosting Server Cost"
-    ],
-    liveUrl: "https://mantbyte.github.io",
-    githubUrl: "https://github.com/sujallohar/Mantbyte",
-    featured: true,
-    completionDate: "Jun 2026",
-    accentColor: "from-amber-500/20 to-orange-500/20"
-  },
-  {
-    id: "deployshield",
-    title: "DeployShield: Modular Deployment & Observability Stack",
-    category: "Full-Stack",
-    summary: "Production-grade deployment management platform built using NestJS, Clean Architecture, GitHub OAuth, and a Prometheus/Grafana/Loki observability pipeline.",
-    problem: "Development teams require unified deployment tracking with granular role-based access control and live infrastructure telemetry without proprietary vendor lock-in.",
-    architecture: [
-      "NestJS backend structured strictly on Clean Architecture principles, isolating domain entities from database drivers and external controllers.",
-      "Robust security implementation featuring GitHub OAuth, JWT refresh-token rotation, and granular RBAC permission gates.",
-      "Containerized deployment on Docker with PostgreSQL transactional storage.",
-      "Full observability instrumentation with Prometheus metrics exporters, Loki log aggregation, and Grafana dashboards."
-    ],
-    techStack: [
-      "NestJS",
-      "TypeScript",
-      "Docker",
-      "PostgreSQL",
-      "GitHub Actions",
-      "Prometheus",
-      "Grafana",
-      "Loki"
-    ],
-    metrics: [
-      "Clean Architecture Layer Isolation",
-      "JWT Refresh-Token Rotation Security",
-      "Distributed Metrics & Tracing Dashboards",
-      "Automated Docker Multi-Stage Builds"
-    ],
-    githubUrl: "https://github.com/sujallohar/cloud-deploy",
+    githubUrl: "https://github.com/sujallohar",
     featured: false,
-    completionDate: "Aug 2026",
-    accentColor: "from-sky-500/20 to-blue-500/20"
+    completionDate: "Jul 2025",
+    includeInVariants: ["full"],
+    resumeHighlights: [
+      "Engineered client-side computer vision pipeline processing 478 facial landmarks at 30 FPS in WebAssembly.",
+      "Guaranteed 100% video stream privacy by eliminating cloud telemetry."
+    ]
   },
   {
-    id: "heart-disease-prediction",
-    title: "Clinical Heart Disease Prediction Engine",
+    id: "nasa-neo-trajectory",
+    title: "NASA Near-Earth Object Orbital Risk Engine",
     category: "Machine Learning",
-    summary: "Comparative machine learning classification engine trained on 10,000+ medical records to predict cardiovascular risk factors using interpretable algorithms.",
-    problem: "Clinical decision support systems require transparent, explainable feature importance alongside high predictive accuracy to be trusted in healthcare workflows.",
+    summary: "Interactive 3D orbital dynamics visualizer and hazard classification engine tracking near-Earth asteroids using real-time NASA JPL ephemeris data.",
+    problem: "Astronomical trajectory tables are complex tabular grids that make it difficult for researchers and students to understand close-approach velocity vectors.",
     architecture: [
-      "Engineered automated data preprocessing, outlier mitigation, and feature scaling pipeline using NumPy and Pandas.",
-      "Trained and benchmarked Logistic Regression, Decision Trees, and K-Nearest Neighbors (KNN) classification algorithms.",
-      "Conducted hyperparameter tuning and k-fold cross-validation, achieving 85%+ validation accuracy."
+      "Queried the NASA JPL NeoWs REST API to ingest orbital parameters, velocity vectors, and miss-distance coordinates.",
+      "Built a mathematical Keplerian orbit simulator in Three.js and WebGL rendering real-time planetary orbits.",
+      "Classified hazardous asteroid trajectories using Scikit-Learn decision trees based on absolute magnitude and minimum orbit intersection distance.",
+      "Developed under time constraints during the NASA International Space Apps Challenge 2024."
+    ],
+    techStack: [
+      "Three.js",
+      "WebGL",
+      "TypeScript",
+      "Python FastAPI",
+      "NASA JPL API",
+      "Docker"
+    ],
+    metrics: [
+      "30,000+ Tracked Astronomical Objects",
+      "60 FPS 3D Orbital Trajectory Rendering",
+      "Real-Time Ephemeris Ingestion from NASA JPL",
+      "NASA Space Apps 2024 Global Nominee"
+    ],
+    githubUrl: "https://github.com/sujallohar",
+    featured: false,
+    completionDate: "Oct 2024",
+    includeInVariants: ["full", "academic"],
+    resumeHighlights: [
+      "Constructed Three.js 3D orbital simulator processing 30,000+ near-Earth asteroids from NASA JPL APIs.",
+      "Integrated Python hazard classifier predicting close-approach risk factors."
+    ]
+  },
+  {
+    id: "automated-notification-pipeline",
+    title: "Automated Student Alert Dispatcher",
+    category: "Full-Stack",
+    summary: "Containerized scheduled alert delivery engine dispatching personalized exam schedules and notifications via WhatsApp API with zero message drops.",
+    problem: "Manual administrative announcements across 500+ students created delivery bottlenecks, delayed exam reminders, and high operational overhead.",
+    architecture: [
+      "Wrote Python worker daemons driven by cron schedules to query student database states in MongoDB.",
+      "Integrated Twilio WhatsApp Business API with queue backoff logic to handle API provider rate limits.",
+      "Packaged the entire alert worker pipeline into Docker containers running on Linux servers.",
+      "Saved administrative teams 10+ manual hours each week while raising delivery confirmation to 99.8%."
     ],
     techStack: [
       "Python",
-      "Scikit-Learn",
-      "NumPy",
-      "Pandas",
-      "Matplotlib",
-      "Seaborn"
+      "Docker",
+      "Twilio API",
+      "MongoDB",
+      "React",
+      "Linux Cron"
     ],
     metrics: [
-      "85%+ Validation Accuracy",
-      "10,000+ Analyzed Clinical Records",
-      "Comparative Algorithm Benchmarking",
-      "Transparent Feature Importance Pipelines"
+      "99.8% Message Delivery Success Rate",
+      "10+ Hours Saved Weekly in Manual Reconciliation",
+      "30% Increase in Communication Delivery Speed",
+      "Zero Downtime During Production Intern Term"
     ],
-    githubUrl: "https://github.com/sujallohar/Heart-disease-prediction",
+    githubUrl: "https://github.com/sujallohar",
     featured: false,
-    completionDate: "May 2025",
-    accentColor: "from-rose-500/20 to-red-500/20"
+    completionDate: "Jul 2025",
+    includeInVariants: ["full"],
+    resumeHighlights: [
+      "Engineered containerized Python dispatch service integrated with Twilio WhatsApp API and MongoDB.",
+      "Automated personalized notifications for 500+ students, increasing delivery speed by 30%."
+    ]
   }
 ];

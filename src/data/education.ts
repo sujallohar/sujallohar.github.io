@@ -5,42 +5,44 @@ export const educationList: Education[] = [
     id: "nirma-btech",
     institution: "Institute of Technology, Nirma University",
     degree: "Bachelor of Technology (B.Tech)",
-    field: "Computer Science & Engineering (Minor in Cybersecurity)",
+    field: "Computer Science and Engineering (Minor in Cybersecurity)",
     location: "Ahmedabad, Gujarat, India",
     startDate: "Aug 2023",
-    endDate: "May 2027 (Expected)",
-    grade: "CGPA: 7.94 / 10.0",
+    endDate: "May 2027",
+    grade: "8.44 / 10.0 CGPA",
     details: [
-      "Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming, Operating Systems, Database Management Systems, Computer Networks, Cloud Computing, Applied Cryptography, DevSecOps.",
-      "Recipient of 10,000 INR UG Research Club grant for healthcare AI research.",
-      "Ministry of External Affairs SPDC Scholarship awardee."
-    ]
+      "Core Coursework: Distributed Systems, Operating Systems, Computer Networks, Data Structures & Algorithms, Database Management Systems, Object-Oriented Programming (Java/C++), Cryptography & Network Security, Cloud Computing.",
+      "Recipient: Ministry of External Affairs SPDC Full Scholarship (2023 - 2027).",
+      "Competitive Programming: Codeforces Specialist (Rating 1400+), solve algorithmic graph and dynamic programming problems daily."
+    ],
+    includeInVariants: ["one-page", "full", "academic"]
   },
   {
-    id: "bser-12th",
-    institution: "Government Senior Secondary School Punarwas Colony",
-    degree: "Senior Secondary School Certificate (12th PCM)",
-    field: "Physics, Chemistry, Mathematics",
-    location: "Sagwara, Dungarpur, Rajasthan, India",
+    id: "svgms-12",
+    institution: "Swami Vivekanand Govt. Model School",
+    degree: "Senior Secondary Certificate (Class XII)",
+    field: "Science Stream (PCM)",
+    location: "Dungarpur, Rajasthan, India",
     startDate: "Jul 2022",
     endDate: "May 2023",
-    grade: "84.80%",
+    grade: "95.8%",
     details: [
-      "Board of Secondary Education Rajasthan (BSER).",
-      "Recognized by Rajasthan Government as Scholar Student with device honor."
-    ]
+      "Awarded Rajasthan State Scholar Student Laptop Award for academic excellence in district rankings."
+    ],
+    includeInVariants: ["full", "academic"]
   },
   {
-    id: "bser-10th",
-    institution: "Excellent Central Public Secondary School",
-    degree: "Secondary School Certificate (10th)",
-    field: "General Science & Mathematics",
-    location: "Chikhli, Dungarpur, Rajasthan, India",
+    id: "svgms-10",
+    institution: "Swami Vivekanand Govt. Model School",
+    degree: "Secondary School Certificate (Class X)",
+    field: "General Curriculum",
+    location: "Dungarpur, Rajasthan, India",
     startDate: "Jul 2020",
     endDate: "May 2021",
-    grade: "99.00%",
+    grade: "96.2%",
     details: [
-      "Top rank in secondary education board examination across district."
-    ]
+      "Top rank in secondary district board examinations."
+    ],
+    includeInVariants: ["full"]
   }
 ];

@@ -1,29 +1,46 @@
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sujal Lohar | Full-Stack & DevSecOps Engineer</title>
-    <meta name="description" content="Portfolio of Sujal Lohar - Full-Stack Software Engineer, DevSecOps Architect, and Undergraduate Researcher at Nirma University. Building resilient distributed microservices and zero-trust cloud infrastructure." />
-    <meta name="keywords" content="Sujal Lohar, Full-Stack Developer, DevSecOps, Cloud Engineer, Software Engineer, Nirma University, Microservices, React, Docker, Kubernetes, Spring Boot" />
+    <title>Sujal Lohar | Systems Engineer & Distributed Architect</title>
+    <meta name="description" content="Technical monograph of Sujal Lohar: Full-Stack Engineer, DevSecOps Architect, and Undergraduate Researcher at Nirma University. Engineering distributed microservices, cryptographic audit ledgers, and federated systems." />
+    <meta name="keywords" content="Sujal Lohar, Distributed Systems, DevSecOps, Microservices, Nirma University, Spring Boot, Kubernetes, Docker, gRPC, Federated Learning, Zero Trust" />
     <meta name="author" content="Sujal Lohar" />
     
     <!-- Open Graph / Social Cards -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://sujallohar.github.io" />
-    <meta property="og:title" content="Sujal Lohar | Full-Stack & DevSecOps Engineer" />
-    <meta property="og:description" content="Engineering resilient cloud-native architectures, polyglot microservices, and security-gated CI/CD systems." />
+    <meta property="og:title" content="Sujal Lohar | Systems Engineer & Distributed Architect" />
+    <meta property="og:description" content="Technical case studies in polyglot microservices, cryptographic WORM ledgers, and federated learning pipelines." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sujal Lohar | Full-Stack & DevSecOps Engineer" />
-    <meta name="twitter:description" content="Engineering resilient cloud-native architectures, polyglot microservices, and security-gated CI/CD systems." />
+    <meta name="twitter:title" content="Sujal Lohar | Systems Engineer & Distributed Architect" />
+    <meta name="twitter:description" content="Technical case studies in polyglot microservices, cryptographic WORM ledgers, and federated learning pipelines." />
     
-    <!-- Google Fonts -->
+    <!-- Typography: Newsreader (Serif Display) + Plus Jakarta Sans (Body) + JetBrains Mono (Telemetry) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script type="application/ld+json">\n{
+
+    <!-- Non-flashing Theme Initializer -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem("portfolio_theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (saved === "dark" || (!saved && prefersDark)) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    
+    <script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Sujal Lohar",
@@ -43,19 +60,21 @@
     "https://codeforces.com/profile/Sujal_lohar"
   ],
   "knowsAbout": [
-    "Full-Stack Development",
-    "DevSecOps",
-    "Cloud Computing",
-    "Microservices",
-    "Kubernetes",
-    "Docker",
-    "Spring Boot",
-    "React",
-    "Applied Cryptography",
-    "Federated Learning"
+    "Distributed Systems",
+    "DevSecOps Architecture",
+    "Polyglot Microservices",
+    "Kubernetes & Docker",
+    "Spring Boot 3.2",
+    "Cryptographic Audit Ledgers",
+    "Federated Learning",
+    "Explainable AI (XAI)",
+    "gRPC & Protocol Buffers",
+    "Zero Trust Security"
   ]
-}\n    </script>\n  </head>
-  <body class="bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500/20 selection:text-cyan-300 antialiased min-h-screen">
+}
+    </script>
+  </head>
+  <body class="selection:bg-[var(--accent-subtle)] selection:text-[var(--accent-terracotta)] antialiased min-h-screen">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

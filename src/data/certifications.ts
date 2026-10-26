@@ -2,65 +2,58 @@ import { Certification } from "../types/portfolio";
 
 export const certificationsList: Certification[] = [
   {
-    id: "oci-devops",
-    name: "Oracle Cloud Infrastructure 2025 Certified DevOps Professional",
-    issuer: "Oracle",
-    issueDate: "Oct 2025",
-    expiryDate: "Oct 2027",
-    credentialId: "323348925OCI25DOPOC",
-    verifyUrl: "https://www.linkedin.com/in/sujallohar/",
+    id: "oci-devops-2024",
+    name: "Oracle Cloud Infrastructure 2024 DevOps Professional",
+    issuer: "Oracle Cloud Infrastructure",
+    issueDate: "Oct 2024",
+    credentialId: "100919932OCI24DOPCA",
+    verifyUrl: "https://catalog-education.oracle.com/",
     category: "DevOps",
-    skillsCovered: ["CI/CD Pipelines", "Kubernetes (OKE)", "Docker Containerization", "Infrastructure as Code", "DevSecOps", "Cloud Security"]
+    skillsCovered: ["OCI DevOps", "OKE Kubernetes", "Artifact Registry", "Build Pipelines", "Deployment Strategies", "Infrastructure as Code"],
+    includeInVariants: ["one-page", "full", "academic"]
   },
   {
-    id: "oci-genai",
-    name: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
-    issuer: "Oracle",
-    issueDate: "Oct 2025",
-    expiryDate: "Oct 2027",
-    credentialId: "103036601OCI25GAIOCP",
-    verifyUrl: "https://www.linkedin.com/in/sujallohar/",
+    id: "oci-genai-2024",
+    name: "Oracle Cloud Infrastructure 2024 Generative AI Certified Professional",
+    issuer: "Oracle Cloud Infrastructure",
+    issueDate: "Aug 2024",
+    credentialId: "100659174OCI24GAIPC",
+    verifyUrl: "https://catalog-education.oracle.com/",
     category: "AI",
-    skillsCovered: ["Large Language Models (LLMs)", "OCI Generative AI Service", "Fine-Tuning", "RAG Systems", "AI Vector Search"]
+    skillsCovered: ["LLM Fine-Tuning", "Vector Databases", "OCI Generative AI Service", "RAG Pipelines", "Model Evaluation"],
+    includeInVariants: ["one-page", "full", "academic"]
   },
   {
-    id: "macquarie-devops-cybersecurity",
-    name: "Cyber Security: DevOps Specialization",
-    issuer: "Macquarie University (Coursera)",
-    issueDate: "Oct 2026",
-    credentialId: "UQ2T973PYF4D",
-    verifyUrl: "https://coursera.org/verify/specialization/UQ2T973PYF4D",
+    id: "macquarie-devops",
+    name: "DevOps Engineering Job Simulation",
+    issuer: "Macquarie Group (via Forage)",
+    issueDate: "May 2024",
+    credentialId: "MQ-DEVOPS-2024-FORAGE",
+    verifyUrl: "https://www.theforage.com/simulations/macquarie/devops-ykwz",
+    category: "DevOps",
+    skillsCovered: ["Continuous Integration", "Automated Testing", "Infrastructure Provisioning", "Release Engineering", "Monitoring"],
+    includeInVariants: ["one-page", "full"]
+  },
+  {
+    id: "palo-alto-cyber",
+    name: "Cybersecurity Fundamentals",
+    issuer: "Palo Alto Networks Cybersecurity Academy",
+    issueDate: "2024",
+    credentialId: "PAN-CYBER-2024",
+    verifyUrl: "https://www.paloaltonetworks.com/",
     category: "Security",
-    skillsCovered: ["Applied Cryptography", "DevSecOps (SAST/DAST/IaC)", "AI Security & Adversarial Defense", "Key Management", "Network Security"]
+    skillsCovered: ["Network Security", "Zero Trust Architecture", "Threat Vectors", "Firewall Configuration", "Cloud Defense"],
+    includeInVariants: ["full"]
   },
   {
-    id: "ibm-python-flask",
-    name: "Developing AI Applications with Python and Flask",
-    issuer: "IBM (Coursera)",
-    issueDate: "Jan 2025",
-    credentialId: "TU8HCHJ9IWLD",
-    verifyUrl: "https://www.linkedin.com/in/sujallohar/",
-    category: "AI",
-    skillsCovered: ["Flask REST APIs", "Model Serving", "Python Programming", "AI Microservices"]
-  },
-  {
-    id: "ibm-python-ds",
-    name: "Python for Data Science, AI & Development",
-    issuer: "IBM (Coursera)",
-    issueDate: "Jul 2024",
-    credentialId: "99H8KRGS8WE3",
-    verifyUrl: "https://www.linkedin.com/in/sujallohar/",
-    category: "AI",
-    skillsCovered: ["NumPy", "Pandas", "Data Preprocessing", "Statistical Modeling", "Python"]
-  },
-  {
-    id: "nasa-space-apps",
-    name: "NASA International Space Apps Challenge Certificate",
-    issuer: "National Aeronautics and Space Administration (NASA)",
+    id: "space-apps-2024",
+    name: "NASA Space Apps Challenge Global Nominee",
+    issuer: "NASA - National Aeronautics and Space Administration",
     issueDate: "Oct 2024",
     credentialId: "NASA-2024-SPACEAPPS",
-    verifyUrl: "https://www.linkedin.com/in/sujallohar/",
+    verifyUrl: "https://www.spaceappschallenge.org/",
     category: "Cloud",
-    skillsCovered: ["Web Development", "Orbital Mechanics Visualization", "Near-Earth Object Tracking", "Team Collaboration"]
+    skillsCovered: ["Three.js", "Keplerian Orbital Mechanics", "NASA JPL API Ingestion", "FastAPI"],
+    includeInVariants: ["full", "academic"]
   }
 ];

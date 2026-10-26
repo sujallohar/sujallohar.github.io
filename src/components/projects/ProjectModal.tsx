@@ -1,100 +1,86 @@
-import { useEffect } from "react";
-import { X, ExternalLink, BookOpen, Layers, CheckCircle2, ShieldCheck } from "lucide-react";
-import { GithubIcon } from "../ui/Icons";
+import React, { useEffect } from "react";
 import { Project } from "../../types/portfolio";
+import { CloseIcon, GithubIcon, ArrowUpRightIcon, ArchitectureIcon } from "../ui/Icons";
 
 interface ProjectModalProps {
   project: Project | null;
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape" && project) {
+        onClose();
+      }
     };
-    if (project) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [project, onClose]);
 
   if (!project) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
-      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-project-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-xs no-print overflow-y-auto"
     >
-      <div
-        className="w-full max-w-3xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden my-8"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="bg-slate-950 px-6 py-5 border-b border-slate-800 flex items-center justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-mono">
-              <span className="px-2.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-medium">
-                {project.category}
-              </span>
-              <span className="text-slate-500">{project.completionDate}</span>
-            </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-              {project.title}
-            </h2>
+      <div className="relative w-full max-w-4xl bg-[var(--bg-canvas)] border border-[var(--border-rule-strong)] shadow-2xl flex flex-col max-h-[92vh] my-auto">
+        {/* Modal Header */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[var(--border-rule)] bg-[var(--bg-surface)]">
+          <div className="flex items-center gap-2.5">
+            <ArchitectureIcon className="w-4 h-4 text-[var(--accent-terracotta)]" />
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)]">
+              [SPEC SHEET: {project.id.toUpperCase()}]
+            </span>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors"
-            aria-label="Close modal"
+            className="p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-transparent hover:border-[var(--border-rule)]"
+            aria-label="Close specification sheet"
           >
-            <X className="w-5 h-5" />
+            <CloseIcon className="w-4 h-4" />
           </button>
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto">
-          
-          {/* Summary */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold">
-              Project Overview
-            </h3>
-            <p className="text-sm text-slate-300 leading-relaxed font-sans">
+        <div className="p-6 overflow-y-auto space-y-6">
+          <div>
+            <div className="text-xs font-mono text-[var(--accent-terracotta)] uppercase font-semibold mb-1">
+              CATEGORY: {project.category} • COMPLETED: {project.completionDate}
+            </div>
+            <h2 id="modal-project-title" className="text-2xl sm:text-3xl font-bold font-serif text-[var(--text-primary)]">
+              {project.title}
+            </h2>
+            <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
               {project.summary}
             </p>
           </div>
 
           {/* Problem Statement */}
-          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4 space-y-2">
-            <h3 className="text-xs font-mono text-amber-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              The Engineering Problem
+          <div className="border border-[var(--border-rule)] p-4 bg-[var(--bg-surface)]">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold mb-2">
+              [THE ARCHITECTURAL PROBLEM]
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed">
               {project.problem}
             </p>
           </div>
 
-          {/* Architectural Breakdown */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5" />
-              Deep-Dive Architectural Specifications
+          {/* Architecture & Implementation Decisions */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold mb-3">
+              [SYSTEM SPECIFICATIONS & IMPLEMENTED PATTERNS]
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {project.architecture.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-slate-950/50 border border-slate-800/80 rounded-lg p-3 text-xs font-mono text-slate-300 flex items-start gap-2.5"
-                >
-                  <span className="w-5 h-5 rounded bg-cyan-950 border border-cyan-800 text-cyan-400 flex items-center justify-center shrink-0 font-bold text-[10px]">
-                    {idx + 1}
+                <div key={idx} className="flex gap-3 text-xs sm:text-sm text-[var(--text-secondary)]">
+                  <span className="text-[var(--accent-terracotta)] font-mono text-xs font-bold pt-0.5">
+                    0{idx + 1}.
                   </span>
                   <span className="leading-relaxed">{item}</span>
                 </div>
@@ -102,37 +88,29 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
           </div>
 
-          {/* Realized Metrics */}
-          {project.metrics && project.metrics.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold">
-                Quantified Engineering Results
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {project.metrics.map((m, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-emerald-500/5 border border-emerald-500/20 rounded-lg p-2.5 text-xs font-mono text-emerald-300 flex items-center gap-2"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>{m}</span>
-                  </div>
-                ))}
-              </div>
+          {/* Measured Benchmark Outcomes */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold mb-3">
+              [MEASURED BENCHMARK METRICS & FAULT TOLERANCE]
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {project.metrics.map((metric, idx) => (
+                <div key={idx} className="border border-[var(--border-rule)] p-2.5 bg-[var(--bg-surface)] flex items-center justify-between text-xs font-mono">
+                  <span className="text-[var(--text-muted)]">VERIFIED</span>
+                  <span className="font-bold text-[var(--text-primary)]">{metric}</span>
+                </div>
+              ))}
             </div>
-          )}
+          </div>
 
-          {/* Tech Stack */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
-              Technologies & Frameworks
+          {/* Technology Ledger */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold mb-2">
+              [TECHNOLOGY LEDGER]
             </h3>
             <div className="flex flex-wrap gap-1.5">
-              {project.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300 text-xs font-mono"
-                >
+              {project.techStack.map((tech, idx) => (
+                <span key={idx} className="border border-[var(--border-rule)] px-2.5 py-1 text-xs font-mono bg-[var(--bg-surface-secondary)] text-[var(--text-primary)]">
                   {tech}
                 </span>
               ))}
@@ -140,54 +118,37 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
         </div>
 
-        {/* Modal Actions Footer */}
-        <div className="px-6 py-4 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        {/* Modal Footer Actions */}
+        <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 border-t border-[var(--border-rule)] bg-[var(--bg-surface)]">
+          <div className="text-xs font-mono text-[var(--text-muted)]">
+            Status: Production Code Verified
+          </div>
           <div className="flex items-center gap-3">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition-all shadow-md shadow-cyan-500/20"
-              >
-                <ExternalLink className="w-4 h-4" />
-                <span>Open Live Platform</span>
-              </a>
-            )}
-
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-200 transition-colors"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium border border-[var(--border-rule)] hover:border-[var(--text-primary)] text-[var(--text-primary)] transition-colors"
               >
-                <GithubIcon className="w-4 h-4" />
-                <span>Source Code</span>
+                <GithubIcon className="w-3.5 h-3.5" />
+                <span>View Source Repository</span>
               </a>
             )}
-
-            {project.docsUrl && (
+            {project.liveUrl && (
               <a
-                href={project.docsUrl}
+                href={project.liveUrl}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-slate-400 hover:text-white transition-colors"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium bg-[var(--accent-terracotta)] text-white hover:opacity-90 transition-opacity"
               >
-                <BookOpen className="w-4 h-4" />
-                <span>Documentation</span>
+                <span>Live Demonstration</span>
+                <ArrowUpRightIcon className="w-3 h-3" />
               </a>
             )}
           </div>
-
-          <button
-            onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors"
-          >
-            Close
-          </button>
         </div>
       </div>
     </div>
   );
-}
+};

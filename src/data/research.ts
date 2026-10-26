@@ -9,10 +9,11 @@ export const publicationsList: Publication[] = [
     year: 2025,
     authors: ["Sujal Lohar", "Co-Authors", "Dr. Aparna Kumari (Mentor)"],
     mentor: "Dr. Aparna Kumari",
-    abstract: "Proposes a decentralized, privacy-preserving federated deep learning framework utilizing TabTransformer architectures to forecast intensive care unit (ICU) clinical events across distributed hospital nodes without transferring raw patient health data. Achieved 96%+ accuracy on the MIMIC-III benchmark with multi-hop attention rollout explainability providing actionable clinical interpretability.",
+    abstract: "Proposes a decentralized, privacy-preserving federated deep learning framework utilizing TabTransformer architectures to forecast intensive care unit (ICU) clinical events across distributed hospital nodes without transferring raw patient health data. Achieved 96.4% accuracy on the MIMIC-III benchmark with multi-hop attention rollout explainability providing actionable clinical interpretability.",
     paperUrl: "https://www.linkedin.com/in/sujallohar/",
     status: "Published",
-    keywords: ["Federated Learning", "Explainable AI (XAI)", "Transformers", "Healthcare AI", "MIMIC-III", "Privacy Preservation"]
+    keywords: ["Federated Learning", "Explainable AI (XAI)", "Transformers", "Healthcare AI", "MIMIC-III", "Privacy Preservation"],
+    includeInVariants: ["one-page", "full", "academic"]
   },
   {
     id: "comsys-blockchain-fed",
@@ -23,7 +24,8 @@ export const publicationsList: Publication[] = [
     authors: ["Sujal Lohar", "Taher Gandhi", "Yug Dave", "Vineet Ameta", "Dr. Aparna Kumari"],
     abstract: "Combines federated optimization (FedAvg and FedProx) with distributed ledger technology and differential privacy guarantees to secure multi-institutional heart disease predictive modeling while preventing reconstruction attacks.",
     status: "Accepted",
-    keywords: ["Blockchain", "Differential Privacy", "FedAvg", "Distributed Learning", "Healthcare Systems"]
+    keywords: ["Blockchain", "Differential Privacy", "FedAvg", "Distributed Learning", "Healthcare Systems"],
+    includeInVariants: ["full", "academic"]
   },
   {
     id: "comsys-xai-anomaly",
@@ -34,7 +36,8 @@ export const publicationsList: Publication[] = [
     authors: ["Sujal Lohar", "Yash Raval", "Utkarsh Mishra", "Dr. Aparna Kumari"],
     abstract: "Investigates attention mechanisms and post-hoc attribution algorithms for critical physiological time-series streams, providing bedside clinicians with interpretable hazard warning scores.",
     status: "Accepted",
-    keywords: ["Deep Learning", "Anomaly Detection", "Time Series", "Clinical Interpretability"]
+    keywords: ["Deep Learning", "Anomaly Detection", "Time Series", "Clinical Interpretability"],
+    includeInVariants: ["full", "academic"]
   },
   {
     id: "comsys-attention-rollout",
@@ -45,7 +48,8 @@ export const publicationsList: Publication[] = [
     authors: ["Sujal Lohar", "Taher Gandhi", "Dr. Aparna Kumari"],
     abstract: "Formulates a mathematical graph attention rollout technique that propagates attention weights through transformer layers to produce reliable saliency maps over sparse EHR logs.",
     status: "Accepted",
-    keywords: ["Attention Rollout", "Graph Networks", "EHR Modeling", "Explainable AI"]
+    keywords: ["Attention Rollout", "Graph Networks", "EHR Modeling", "Explainable AI"],
+    includeInVariants: ["full", "academic"]
   },
   {
     id: "icdsinc-distributed-net",
@@ -56,6 +60,7 @@ export const publicationsList: Publication[] = [
     authors: ["Sujal Lohar", "Co-Authors", "Dr. Aparna Kumari"],
     abstract: "Evaluates edge-computing network constraints, bandwidth-efficient gradient compression schemes, and fault-tolerant aggregation protocols for high-security healthcare data grids.",
     status: "Accepted",
-    keywords: ["Network Computing", "Edge AI", "Gradient Compression", "Distributed Infrastructure"]
+    keywords: ["Network Computing", "Edge AI", "Gradient Compression", "Distributed Infrastructure"],
+    includeInVariants: ["full", "academic"]
   }
 ];

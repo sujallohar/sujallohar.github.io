@@ -1,152 +1,135 @@
-import { useState } from "react";
-import { ShieldCheck, ExternalLink, Check, Copy, Calendar, Trophy } from "lucide-react";
+import React, { useState } from "react";
 import { certificationsList } from "../../data/certifications";
 import { awardsList } from "../../data/awards";
+import { CopyIcon, CheckIcon, ArrowUpRightIcon } from "../ui/Icons";
 
-export default function CredentialsSection() {
+export const CredentialsSection: React.FC = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const handleCopy = (idText: string, key: string) => {
-    navigator.clipboard.writeText(idText);
-    setCopiedId(key);
+  const copyCredential = (id: string) => {
+    navigator.clipboard.writeText(id);
+    setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };
 
   return (
-    <section id="certifications" className="py-24 border-t border-slate-900 bg-slate-950 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        {/* Section Header */}
-        <div className="space-y-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-xs font-mono text-amber-400">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Accredited Credentials & Honors</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Industry Certifications & State Awards
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Verified technical specializations across Oracle Cloud DevOps, applied cryptography, container security, and governmental digital service honors.
-          </p>
+    <section id="commendations" className="border-b border-[var(--border-rule)] py-12 sm:py-16 space-y-10">
+      {/* Header */}
+      <div className="space-y-2 border-b border-[var(--border-rule)] pb-4">
+        <div className="text-[11px] font-mono text-[var(--accent-terracotta)] uppercase tracking-widest font-semibold">
+          [§06 // VERIFIED COMMENDATIONS & CREDENTIALS]
         </div>
+        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[var(--text-primary)] tracking-tight">
+          Certifications & State Recognitions
+        </h2>
+        <p className="text-sm text-[var(--text-secondary)] max-w-3xl leading-relaxed">
+          Verifiable professional certifications and government recognitions in cybersecurity, cloud infrastructure, and distributed systems.
+        </p>
+      </div>
 
-        {/* Certifications Grid */}
-        <div className="space-y-6">
-          <div className="border-b border-slate-800 pb-2">
-            <h3 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-cyan-400" />
-              <span>Verified Professional Certifications</span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certificationsList.map((cert) => (
+      {/* Part 1: Official Cloud & DevOps Certifications */}
+      <div className="space-y-4">
+        <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold">
+          [OFFICIAL CLOUD & DEVOPS CREDENTIALS]
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {certificationsList.map(cert => {
+            const isCopied = copiedId === cert.credentialId;
+            return (
               <div
                 key={cert.id}
-                className="bg-slate-900/90 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-all flex flex-col justify-between space-y-4 shadow-md"
+                className="border border-[var(--border-rule)] bg-[var(--bg-surface)] p-5 space-y-3 hover:border-[var(--border-rule-strong)] transition-colors flex flex-col justify-between"
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-medium">
-                      {cert.issuer}
+                <div className="space-y-2">
+                  <div className="flex justify-between items-baseline text-xs font-mono">
+                    <span className="text-[var(--accent-terracotta)] font-bold">
+                      [{cert.category.toUpperCase()}]
                     </span>
-                    <span className="text-slate-500 flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {cert.issueDate}
-                    </span>
+                    <span className="text-[var(--text-muted)]">{cert.issueDate}</span>
                   </div>
-
-                  <h4 className="text-base font-bold text-white tracking-tight leading-snug">
+                  <h3 className="text-lg font-bold font-serif text-[var(--text-primary)] leading-snug">
                     {cert.name}
-                  </h4>
-
-                  {cert.credentialId && (
-                    <div className="bg-slate-950 border border-slate-800/80 rounded-lg p-2 flex items-center justify-between text-xs font-mono text-slate-400">
-                      <div className="truncate mr-2">
-                        <span className="text-slate-500 text-[10px] block">CREDENTIAL ID</span>
-                        <span className="text-slate-200 select-all">{cert.credentialId}</span>
-                      </div>
-                      <button
-                        onClick={() => handleCopy(cert.credentialId!, cert.id)}
-                        className="text-slate-400 hover:text-cyan-400 p-1 rounded"
-                        title="Copy credential ID"
-                        aria-label="Copy credential ID"
-                      >
-                        {copiedId === cert.id ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5" />
-                        )}
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Skills Covered */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {cert.skillsCovered.map((s) => (
-                      <span
-                        key={s}
-                        className="px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-400 text-[11px] font-mono"
-                      >
-                        {s}
-                      </span>
-                    ))}
+                  </h3>
+                  <div className="text-xs text-[var(--text-secondary)] font-mono">
+                    Issuer: {cert.issuer}
                   </div>
                 </div>
 
-                {cert.verifyUrl && (
-                  <div className="pt-3 border-t border-slate-800/80">
+                <div className="pt-3 border-t border-[var(--border-rule)] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  {cert.credentialId ? (
+                    <button
+                      type="button"
+                      onClick={() => copyCredential(cert.credentialId!)}
+                      className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                      title="Click to copy credential ID"
+                    >
+                      {isCopied ? (
+                        <>
+                          <CheckIcon className="w-3.5 h-3.5 text-[var(--accent-verdigris)]" />
+                          <span className="text-[var(--accent-verdigris)] font-bold">ID Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <CopyIcon className="w-3.5 h-3.5" />
+                          <span>ID: {cert.credentialId.slice(0, 16)}...</span>
+                        </>
+                      )}
+                    </button>
+                  ) : (
+                    <span className="text-[var(--text-muted)]">Verified Record</span>
+                  )}
+
+                  {cert.verifyUrl && (
                     <a
                       href={cert.verifyUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 transition-colors"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[var(--accent-terracotta)] hover:underline font-medium"
                     >
-                      <span>Show Credential</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Verify</span>
+                      <ArrowUpRightIcon className="w-3 h-3" />
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
+      </div>
 
-        {/* Honors and Awards Grid */}
-        <div className="space-y-6 pt-6">
-          <div className="border-b border-slate-800 pb-2">
-            <h3 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-amber-400" />
-              <span>Honors & Fellowships</span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {awardsList.map((award) => (
-              <div
-                key={award.id}
-                className="bg-slate-900/90 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-all space-y-3 shadow-md"
-              >
-                <div className="flex items-center justify-between text-xs font-mono text-slate-500">
-                  <span className="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-medium">
-                    {award.scope}
+      {/* Part 2: Honors & Commendations */}
+      <div className="space-y-4 pt-4 border-t border-[var(--border-rule)]">
+        <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold">
+          [GOVERNMENT, UNIVERSITY & INTERNATIONAL HONORS]
+        </div>
+        <div className="divide-y divide-[var(--border-rule)] border border-[var(--border-rule)] bg-[var(--bg-surface)]">
+          {awardsList.map(award => (
+            <div
+              key={award.id}
+              className="p-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 hover:bg-[var(--bg-surface-secondary)]/30 transition-colors"
+            >
+              <div className="space-y-1 max-w-2xl">
+                <div className="flex items-center gap-2 text-xs font-mono">
+                  <span className="text-[var(--accent-terracotta)] font-bold">
+                    [{award.scope.toUpperCase()}]
                   </span>
-                  <span>{award.date}</span>
+                  <span className="text-[var(--text-muted)]">•</span>
+                  <span className="text-[var(--text-muted)]">{award.organization}</span>
                 </div>
-
-                <div>
-                  <h4 className="text-base font-bold text-white tracking-tight">{award.title}</h4>
-                  <p className="text-xs font-mono text-cyan-400 mt-0.5">{award.organization}</p>
-                </div>
-
-                <p className="text-xs text-slate-300 leading-relaxed font-sans pt-1">
+                <h3 className="text-base font-bold font-serif text-[var(--text-primary)]">
+                  {award.title}
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                   {award.description}
                 </p>
               </div>
-            ))}
-          </div>
+              <div className="text-xs font-mono text-[var(--text-muted)] whitespace-nowrap">
+                {award.date}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
-}
+};

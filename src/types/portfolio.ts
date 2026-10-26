@@ -5,6 +5,8 @@ export type ProjectCategory =
   | "Healthcare AI" 
   | "Machine Learning";
 
+export type ResumeVariant = "one-page" | "full" | "academic";
+
 export interface Project {
   id: string;
   title: string;
@@ -20,6 +22,8 @@ export interface Project {
   featured: boolean;
   completionDate: string;
   accentColor?: string;
+  includeInVariants?: ResumeVariant[];
+  resumeHighlights?: string[];
 }
 
 export interface Experience {
@@ -33,6 +37,8 @@ export interface Experience {
   responsibilities: string[];
   skills: string[];
   metrics?: string[];
+  includeInVariants?: ResumeVariant[];
+  resumeBullets?: string[];
 }
 
 export interface Education {
@@ -45,6 +51,7 @@ export interface Education {
   endDate: string;
   grade?: string;
   details?: string[];
+  includeInVariants?: ResumeVariant[];
 }
 
 export interface Publication {
@@ -60,6 +67,7 @@ export interface Publication {
   paperUrl?: string;
   status: "Published" | "Accepted" | "Under Review";
   keywords: string[];
+  includeInVariants?: ResumeVariant[];
 }
 
 export interface Certification {
@@ -72,6 +80,7 @@ export interface Certification {
   verifyUrl?: string;
   category: "DevOps" | "Cloud" | "Security" | "AI";
   skillsCovered: string[];
+  includeInVariants?: ResumeVariant[];
 }
 
 export interface Award {
@@ -82,16 +91,19 @@ export interface Award {
   description: string;
   scope: "International" | "National" | "State" | "University";
   credentialUrl?: string;
+  includeInVariants?: ResumeVariant[];
 }
 
 export interface SkillCategory {
   title: string;
   description: string;
+  includeInVariants?: ResumeVariant[];
   skills: {
     name: string;
     level: "Core" | "Advanced" | "Working";
     icon: string;
     context: string;
+    includeInVariants?: ResumeVariant[];
   }[];
 }
 
@@ -101,6 +113,9 @@ export interface PersonalInfo {
   title: string;
   tagline: string;
   bio: string;
+  currentlyFocusing: string;
+  workPhilosophy: string;
+  seekingRoleNote: string;
   location: string;
   permanentLocation: string;
   email: string;
@@ -109,7 +124,7 @@ export interface PersonalInfo {
   github: string;
   linkedin: string;
   codeforces: string;
-  resumePdfUrl: string;
+  resumePdfUrl?: string;
   languages: string[];
   openToRoles: string[];
   stats: {

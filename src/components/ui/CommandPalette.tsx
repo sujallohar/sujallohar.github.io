@@ -1,272 +1,267 @@
-import { useState, useEffect } from "react";
-import { Search, X, Download, ExternalLink, BookOpen, Layers, Briefcase, Mail, Shield } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./Icons";
-import { personalInfo } from "../../data/personal";
+import React, { useState, useEffect, useRef } from "react";
+import { ResumeVariant } from "../../types/portfolio";
+import { CloseIcon } from "./Icons";
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectProject?: (projectId: string) => void;
+  onOpenResumeVariant: (variant: ResumeVariant) => void;
 }
 
-interface CommandItem {
-  id: string;
-  title: string;
-  category: "Navigation" | "Action" | "External";
-  icon: any;
-  action: () => void;
-  shortcut?: string;
-}
+export const CommandPalette: React.FC<CommandPaletteProps> = ({
+  isOpen,
+  onClose,
+  onOpenResumeVariant
+}) => {
+  const [query, setQuery] = useState<string>("");
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
-  const [query, setQuery] = useState("");
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        if (isOpen) onClose();
-        else {
-          // handled by parent
-        }
-      }
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
-
-  const commands: CommandItem[] = [
+  const actions = [
     {
-      id: "nav-about",
-      title: "Go to About / Bio",
+      id: "sec-dispatch",
+      title: "Jump: §01 // Executive Dispatch",
       category: "Navigation",
-      icon: Layers,
-      action: () => {
-        window.location.hash = "#about";
+      run: () => {
+        window.location.hash = "#dispatch";
         onClose();
       }
     },
     {
-      id: "nav-experience",
-      title: "Go to Experience & Education",
+      id: "sec-case-studies",
+      title: "Jump: §02 // Systems Case Studies",
       category: "Navigation",
-      icon: Briefcase,
-      action: () => {
-        window.location.hash = "#experience";
+      run: () => {
+        window.location.hash = "#case-studies";
         onClose();
       }
     },
     {
-      id: "nav-projects",
-      title: "Go to Featured Projects",
+      id: "sec-proceedings",
+      title: "Jump: §03 // Research Proceedings",
       category: "Navigation",
-      icon: Layers,
-      action: () => {
-        window.location.hash = "#projects";
+      run: () => {
+        window.location.hash = "#proceedings";
         onClose();
       }
     },
     {
-      id: "nav-skills",
-      title: "Go to Technical Skills Matrix",
+      id: "sec-record",
+      title: "Jump: §04 // Career & Fellowship Record",
       category: "Navigation",
-      icon: Shield,
-      action: () => {
-        window.location.hash = "#skills";
+      run: () => {
+        window.location.hash = "#record";
         onClose();
       }
     },
     {
-      id: "nav-research",
-      title: "Go to Research & Publications",
+      id: "sec-capability",
+      title: "Jump: §05 // Capability Inventory",
       category: "Navigation",
-      icon: BookOpen,
-      action: () => {
-        window.location.hash = "#research";
+      run: () => {
+        window.location.hash = "#capability";
         onClose();
       }
     },
     {
-      id: "nav-certifications",
-      title: "Go to Certifications & Awards",
+      id: "sec-commendations",
+      title: "Jump: §06 // Verified Commendations",
       category: "Navigation",
-      icon: Shield,
-      action: () => {
-        window.location.hash = "#certifications";
+      run: () => {
+        window.location.hash = "#commendations";
         onClose();
       }
     },
     {
-      id: "nav-contact",
-      title: "Go to Contact Form",
+      id: "sec-contact",
+      title: "Jump: §07 // Direct Dispatch",
       category: "Navigation",
-      icon: Mail,
-      action: () => {
+      run: () => {
         window.location.hash = "#contact";
         onClose();
       }
     },
     {
-      id: "act-resume",
-      title: "Download Resume PDF (Sujal_CV.pdf)",
-      category: "Action",
-      icon: Download,
-      action: () => {
-        window.open(personalInfo.resumePdfUrl, "_blank");
+      id: "cv-one-page",
+      title: "Resume Studio: Open Industry 1-Page (SWE / DevSecOps)",
+      category: "Resume Studio",
+      run: () => {
+        onClose();
+        onOpenResumeVariant("one-page");
+      }
+    },
+    {
+      id: "cv-full",
+      title: "Resume Studio: Open Full Technical CV",
+      category: "Resume Studio",
+      run: () => {
+        onClose();
+        onOpenResumeVariant("full");
+      }
+    },
+    {
+      id: "cv-academic",
+      title: "Resume Studio: Open Academic & Research CV",
+      category: "Resume Studio",
+      run: () => {
+        onClose();
+        onOpenResumeVariant("academic");
+      }
+    },
+    {
+      id: "theme-toggle",
+      title: "Appearance: Toggle Light / Dark Monograph Theme",
+      category: "Preferences",
+      run: () => {
+        const isDark = document.documentElement.classList.contains("dark");
+        if (isDark) {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("portfolio_theme", "light");
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("portfolio_theme", "dark");
+        }
         onClose();
       }
     },
     {
-      id: "ext-govasset360",
-      title: "Open Live GovAsset 360 Platform",
-      category: "External",
-      icon: ExternalLink,
-      action: () => {
-        window.open("https://govasset-360.web.app", "_blank");
-        onClose();
-      }
-    },
-    {
-      id: "ext-samvedna",
-      title: "Open Live Samvedna Autism Platform",
-      category: "External",
-      icon: ExternalLink,
-      action: () => {
-        window.open("https://samvedna-beta.vercel.app", "_blank");
-        onClose();
-      }
-    },
-    {
-      id: "ext-devsecops",
-      title: "Open Secure DevSecOps Platform Docs",
-      category: "External",
-      icon: ExternalLink,
-      action: () => {
-        window.open("https://sujallohar.github.io/secure-devsecops-platform/", "_blank");
+      id: "copy-email",
+      title: "Action: Copy Primary Email (sujapanchal17@gmail.com)",
+      category: "Contact",
+      run: () => {
+        navigator.clipboard.writeText("sujapanchal17@gmail.com");
         onClose();
       }
     },
     {
       id: "ext-github",
-      title: "Open GitHub Profile (sujallohar)",
+      title: "External: Open GitHub Profile (@sujallohar)",
       category: "External",
-      icon: GithubIcon,
-      action: () => {
-        window.open(personalInfo.github, "_blank");
+      run: () => {
+        window.open("https://github.com/sujallohar", "_blank");
         onClose();
       }
     },
     {
       id: "ext-linkedin",
-      title: "Open LinkedIn Profile",
+      title: "External: Open LinkedIn Profile (sujallohar)",
       category: "External",
-      icon: LinkedinIcon,
-      action: () => {
-        window.open(personalInfo.linkedin, "_blank");
+      run: () => {
+        window.open("https://www.linkedin.com/in/sujallohar", "_blank");
         onClose();
       }
     }
   ];
 
-  const filtered = commands.filter((cmd) =>
-    cmd.title.toLowerCase().includes(query.toLowerCase().trim())
+  const filtered = actions.filter(a =>
+    a.title.toLowerCase().includes(query.toLowerCase()) ||
+    a.category.toLowerCase().includes(query.toLowerCase())
   );
 
   useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev + 1) % (filtered.length || 1));
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev - 1 + filtered.length) % (filtered.length || 1));
-    } else if (e.key === "Enter" && filtered[selectedIndex]) {
-      e.preventDefault();
-      filtered[selectedIndex].action();
+    if (isOpen) {
+      setQuery("");
+      setSelectedIndex(0);
+      setTimeout(() => inputRef.current?.focus(), 50);
     }
-  };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev + 1) % (filtered.length || 1));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev - 1 + (filtered.length || 1)) % (filtered.length || 1));
+      } else if (e.key === "Enter" && filtered[selectedIndex]) {
+        e.preventDefault();
+        filtered[selectedIndex].run();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose, filtered, selectedIndex]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cmd-palette-title"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/75 backdrop-blur-xs no-print"
+      onClick={onClose}
+    >
       <div
-        className="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-sm"
-        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-xl bg-[var(--bg-canvas)] border border-[var(--border-rule-strong)] shadow-2xl overflow-hidden font-mono text-xs"
+        onClick={e => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-800 bg-slate-950">
-          <Search className="w-4 h-4 text-cyan-400 shrink-0" />
+        <div className="flex items-center px-4 py-3 border-b border-[var(--border-rule)] bg-[var(--bg-surface)]">
+          <span className="text-[var(--accent-terracotta)] font-bold mr-2">&gt;</span>
           <input
+            ref={inputRef}
             type="text"
-            autoFocus
-            placeholder="Type a command or jump to section..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none text-xs font-mono"
+            onChange={e => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
+            placeholder="Type a command or section..."
+            className="w-full bg-transparent border-none text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-hidden text-xs"
           />
           <button
+            type="button"
             onClick={onClose}
-            className="p-1 text-slate-500 hover:text-slate-300 rounded"
+            className="p-1 text-[var(--text-muted)] hover:text-[var(--text-primary)] ml-2"
             aria-label="Close command palette"
           >
-            <X className="w-4 h-4" />
+            <CloseIcon className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        {/* Command Items List */}
-        <div className="max-h-80 overflow-y-auto p-2 space-y-1">
-          {filtered.length > 0 ? (
-            filtered.map((item, idx) => {
-              const Icon = item.icon;
-              const isSelected = idx === selectedIndex;
-              return (
-                <button
-                  key={item.id}
-                  onClick={item.action}
-                  onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs transition-colors ${
-                    isSelected
-                      ? "bg-cyan-500/10 text-cyan-300 border border-cyan-500/30"
-                      : "text-slate-300 hover:bg-slate-800/60"
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Icon className={`w-4 h-4 ${isSelected ? "text-cyan-400" : "text-slate-500"}`} />
-                    <span>{item.title}</span>
-                  </div>
-                  <span className="text-[10px] text-slate-500 uppercase tracking-wider">
-                    {item.category}
-                  </span>
-                </button>
-              );
-            })
-          ) : (
-            <div className="py-8 text-center text-xs text-slate-500">
+        {/* Results List */}
+        <div className="max-h-80 overflow-y-auto divide-y divide-[var(--border-rule)] bg-[var(--bg-surface)]">
+          {filtered.length === 0 ? (
+            <div className="p-6 text-center text-[var(--text-muted)]">
               No matching commands found.
             </div>
+          ) : (
+            filtered.map((action, idx) => (
+              <div
+                key={action.id}
+                onClick={() => action.run()}
+                className={`px-4 py-2.5 flex items-center justify-between cursor-pointer transition-colors ${
+                  idx === selectedIndex
+                    ? "bg-[var(--accent-terracotta)] text-white"
+                    : "text-[var(--text-primary)] hover:bg-[var(--bg-surface-secondary)]"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="opacity-75">{action.title}</span>
+                </div>
+                <span className={`text-[10px] uppercase tracking-wider ${
+                  idx === selectedIndex ? "text-white/80" : "text-[var(--text-muted)]"
+                }`}>
+                  {action.category}
+                </span>
+              </div>
+            ))
           )}
         </div>
 
-        {/* Footer shortcuts hint */}
-        <div className="px-4 py-2.5 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
-          <div className="flex items-center gap-3">
-            <span>↑↓ Navigate</span>
-            <span>↵ Select</span>
-            <span>ESC Close</span>
-          </div>
-          <span className="text-cyan-400 font-bold">Sujal Lohar DevSecOps</span>
+        {/* Footer Hints */}
+        <div className="px-4 py-2 border-t border-[var(--border-rule)] bg-[var(--bg-surface-secondary)] flex justify-between items-center text-[10px] text-[var(--text-muted)]">
+          <span>Navigate: ↑ ↓ • Execute: Enter</span>
+          <span>Close: Esc</span>
         </div>
       </div>
     </div>
   );
-}
+};

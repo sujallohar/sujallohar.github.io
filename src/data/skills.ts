@@ -3,19 +3,21 @@ import { SkillCategory } from "../types/portfolio";
 export const skillCategories: SkillCategory[] = [
   {
     title: "Programming Languages",
-    description: "Core languages used in system development, algorithms, and backend services.",
+    description: "Core languages used in systems programming, algorithms, and microservice backends.",
+    includeInVariants: ["one-page", "full", "academic"],
     skills: [
-      { name: "C++", level: "Core", icon: "cplusplus", context: "Data structures, algorithms, memory management, high-performance logic." },
-      { name: "Python", level: "Core", icon: "python", context: "AI pipelines, automation agents, Flask/FastAPI, ML feature engineering." },
-      { name: "JavaScript / TypeScript", level: "Core", icon: "typescript", context: "React 19, NestJS, Node.js, Express AppSec gateways, type systems." },
-      { name: "Java", level: "Advanced", icon: "java", context: "Spring Boot 3.2, polyglot microservices, Saga choreography, gRPC." },
-      { name: "SQL", level: "Core", icon: "postgresql", context: "Complex relational queries, indexing, PostgreSQL, MySQL." },
-      { name: "Bash / Shell", level: "Advanced", icon: "gnubash", context: "Linux automation, CI/CD runners, container scripting." }
+      { name: "C++", level: "Core", icon: "cplusplus", context: "Memory management, data structures, pointer semantics, competitive programming." },
+      { name: "Python", level: "Core", icon: "python", context: "PyTorch federated models, FastAPI, automation daemons, feature engineering." },
+      { name: "JavaScript / TypeScript", level: "Core", icon: "typescript", context: "React 19, Node.js, Express AppSec gateways, type systems, Web Crypto." },
+      { name: "Java", level: "Advanced", icon: "java", context: "Spring Boot 3.2, gRPC RPC services, Saga choreography, Redis blacklisting." },
+      { name: "SQL", level: "Core", icon: "postgresql", context: "ACID transactions, transactional outbox pattern, PostgreSQL, MySQL." },
+      { name: "Bash / Shell", level: "Advanced", icon: "gnubash", context: "Linux automation, CI/CD runners, container scripting, systemd." }
     ]
   },
   {
     title: "Cloud, DevOps & DevSecOps",
-    description: "Infrastructure as code, containerization, security gates, and deployment automation.",
+    description: "Containerization, shift-left vulnerability scanning, and infrastructure automation.",
+    includeInVariants: ["one-page", "full", "academic"],
     skills: [
       { name: "Docker", level: "Core", icon: "docker", context: "Multi-stage builds, non-root user execution, alpine minimization, layer caching." },
       { name: "Kubernetes", level: "Advanced", icon: "kubernetes", context: "Pod security standards, ingress routing, Istio service mesh, statefulsets." },
@@ -28,17 +30,19 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Backend & Distributed Systems",
     description: "High-throughput APIs, distributed transaction patterns, and resilience engineering.",
+    includeInVariants: ["one-page", "full", "academic"],
     skills: [
       { name: "Spring Boot 3.2", level: "Advanced", icon: "spring", context: "Microservices architecture, gRPC endpoints, Redis token blacklisting." },
       { name: "Node.js & Express", level: "Core", icon: "nodedotjs", context: "AppSec gateways, Helmet defense, sliding-window rate limiters, Zod validation." },
       { name: "NestJS", level: "Advanced", icon: "nestjs", context: "Clean Architecture, dependency injection, OAuth authentication, RBAC." },
       { name: "gRPC & Protocol Buffers", level: "Advanced", icon: "grpc", context: "High-performance inter-microservice RPCs with low overhead." },
-      { name: "Flask & FastAPI", level: "Core", icon: "flask", context: "Model serving, RESTful APIs, asynchronous background tasks." }
+      { name: "Kafka & Redis", level: "Core", icon: "redis", context: "Event streams, session stores, sliding-window rate limiters, distributed locks." }
     ]
   },
   {
     title: "Security, Cryptography & Observability",
     description: "Zero-trust verification, tamper-evident ledgers, and telemetry instrumentation.",
+    includeInVariants: ["full", "academic"],
     skills: [
       { name: "Cryptographic SHA-256 Ledger", level: "Core", icon: "key", context: "Web Crypto hash chaining, WORM immutable storage, tamper attack detection." },
       { name: "Prometheus & Grafana", level: "Advanced", icon: "prometheus", context: "Standard OpenTelemetry metrics, alerting thresholds, system health dashboards." },
@@ -49,6 +53,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Databases & Storage",
     description: "Relational, document, and in-memory transactional storage.",
+    includeInVariants: ["one-page", "full"],
     skills: [
       { name: "PostgreSQL", level: "Core", icon: "postgresql", context: "ACID transactions, transactional outbox pattern, schema design." },
       { name: "MongoDB", level: "Core", icon: "mongodb", context: "Document aggregation, high-throughput ingestion, flexible schemas." },
@@ -57,8 +62,9 @@ export const skillCategories: SkillCategory[] = [
     ]
   },
   {
-    title: "Artificial Intelligence & Machine Learning",
+    title: "Machine Learning & Federated Systems",
     description: "Applied deep learning, federated training, and computer vision.",
+    includeInVariants: ["full", "academic"],
     skills: [
       { name: "Federated Learning (FedAvg / FedProx)", level: "Advanced", icon: "network", context: "Decentralized ICU hazard prediction, differential privacy, MIMIC-III." },
       { name: "Explainable AI (XAI)", level: "Advanced", icon: "brain", context: "TabTransformer attention rollout, saliency attribution for clinical data." },
