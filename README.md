@@ -1,36 +1,39 @@
 # Sujal Lohar - Developer Portfolio & Systems Showcase
 
-Production-grade, dynamic, highly interactive personal portfolio website for Sujal Lohar (Full-Stack Engineer, DevSecOps Architect, and Undergraduate Researcher at Nirma University).
+Production-grade, dynamic, highly interactive personal developer portfolio for Sujal Lohar (Full-Stack Engineer, DevSecOps Architect, and Undergraduate Researcher at Nirma University).
+
+Live Production URL: https://sujallohar.github.io/
+GitHub Repository: https://github.com/sujallohar/sujallohar.github.io
 
 ## Architecture & Tech Stack
 
-- Frontend Framework: React 19 + TypeScript + Vite
-- Styling: Tailwind CSS (Modern tokenized design system)
-- Icons: SVG Iconography via Lucide React & Custom Brand SVGs (Strictly zero emojis)
-- Data Layer: Decoupled typed data files in `src/data/`
-- Telemetry: GitHub REST API integration with 12h localStorage cache & offline fallback
-- Command Palette: Global Cmd+K / Ctrl+K spotlight navigation
-- Contact Form: Client-side validation with honeypot anti-spam protection
+- Frontend Framework: React 19 + TypeScript + Vite 6
+- Styling: Tailwind CSS (Modern tokenized Slate & Obsidian design system)
+- Typography: Inter (UI) and JetBrains Mono (Code / Metrics)
+- Accessibility: WCAG 2.1 AA compliant, skip-to-content bypass, prefers-reduced-motion support
+- SEO & Telemetry: JSON-LD Person schema, Open Graph metadata, sitemap.xml, robots.txt, GitHub REST API telemetry with 12h caching
+- Command Palette: Global Cmd+K / Ctrl+K keyboard shortcut launcher
+- Strict Policy: Strictly zero emojis across codebase, copy, and UI elements
 
 ## Project Structure
 
 ```text
 src/
-├── components/
-│   ├── layout/            # Navbar, Footer
-│   ├── hero/              # HeroSection, TerminalBio
-│   ├── projects/          # ProjectsSection, ProjectCard, ProjectModal
-│   ├── experience/        # ExperienceTimeline (Work & Education)
-│   ├── skills/            # SkillsMatrix (Categorized with context)
-│   ├── research/          # ResearchSection (IEEE & International Conferences)
-│   ├── certifications/    # CredentialsSection (OCI, Macquarie, Awards)
-│   ├── github/            # GitHubTelemetry
-│   ├── contact/           # ContactSection & Form
-│   └── ui/                # CommandPalette, Icons
-├── data/                  # Decoupled content files (projects, experience, etc.)
-├── types/                 # TypeScript data contracts (portfolio.ts)
-├── App.tsx                # Master assembly
-└── main.tsx               # Application entry
+|-- components/
+|   |-- layout/            # Navbar, Footer
+|   |-- hero/              # HeroSection, TerminalBio (interactive tabbed CLI)
+|   |-- projects/          # ProjectsSection, ProjectCard, ProjectModal (architecture deep-dives)
+|   |-- experience/        # ExperienceTimeline (Industry, Leadership, Education filters)
+|   |-- skills/            # SkillsMatrix (Domain categorized with production context)
+|   |-- research/          # ResearchSection (IEEE & International Conferences)
+|   |-- certifications/    # CredentialsSection (OCI, Macquarie, Awards)
+|   |-- github/            # GitHubTelemetry (Live repository stats & cache)
+|   |-- contact/           # ContactSection & Form (Honeypot anti-spam protection)
+|   `-- ui/                # CommandPalette, Icons
+|-- data/                  # Decoupled content files (projects, experience, skills, etc.)
+|-- types/                 # Strict TypeScript data contracts (portfolio.ts)
+|-- App.tsx                # Master assembly
+`-- main.tsx               # Application entry
 ```
 
 ## Quick Start & Local Development
@@ -50,34 +53,37 @@ src/
    npm run build
    ```
 
-4. Preview production build:
+4. Preview production build locally:
    ```bash
    npm run preview
    ```
 
 ## Content Editing Guide
 
-All text, projects, and certifications live in structured data files. No markup editing required:
-- Projects: `src/data/projects.ts`
-- Experience & Leadership: `src/data/experience.ts`
-- Academic Credentials: `src/data/education.ts`
-- Research Papers: `src/data/research.ts`
-- Certifications: `src/data/certifications.ts`
+All text, projects, and certifications live in structured TypeScript data files in `src/data/`. No JSX/HTML markup editing is required to update content:
+
+- Personal Profile & Social Links: `src/data/personal.ts`
+- Flagship Projects & Architecture Details: `src/data/projects.ts`
+- Work Experience & Leadership: `src/data/experience.ts`
+- Education: `src/data/education.ts`
+- Research Publications: `src/data/research.ts`
+- Certifications & Badges: `src/data/certifications.ts`
 - Awards & Honors: `src/data/awards.ts`
-- Skills: `src/data/skills.ts`
-- Personal Profile: `src/data/personal.ts`
+- Skills Matrix & Context: `src/data/skills.ts`
 - Resume PDF: Replace `public/Sujal_CV.pdf`
 
-## Free-Tier Deployment Options
+## Continuous Deployment (CI/CD)
 
-### Option 1: Vercel (Recommended)
-1. Push this folder to a GitHub repository (`sujallohar/portfolio`).
-2. Import the project on vercel.com.
-3. Vercel automatically detects Vite and deploys to `https://sujallohar.vercel.app`.
+Deployments are fully automated via GitHub Actions on every push to the `main` branch.
 
-### Option 2: GitHub Pages
-1. In `vite.config.ts`, set `base: "/"` (or `base: "/<repo-name>/"`).
-2. Add a GitHub Actions workflow to build and push `dist/` to GitHub Pages.
+- Workflow definition: `.github/workflows/deploy.yml`
+- Hosting: GitHub Pages (100% free-tier, HTTPS enforced, custom domain ready)
+- Target URL: https://sujallohar.github.io/
+
+### Custom Domain Configuration (Optional)
+If you wish to link a custom domain (e.g., `sujallohar.dev` or `sujallohar.com`):
+1. Add a `CNAME` record in your DNS provider pointing to `sujallohar.github.io`.
+2. In GitHub repository Settings -> Pages -> Custom domain, enter your domain and check "Enforce HTTPS".
 
 ---
 *Built with zero emojis, high typographic hierarchy, and production engineering rigor.*
