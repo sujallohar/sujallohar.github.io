@@ -98,9 +98,9 @@ export const DispatchHeader: React.FC<DispatchHeaderProps> = ({ onOpenResume }) 
           <div className="border border-[var(--border-rule-strong)] p-1.5 bg-[var(--bg-surface)]">
             <div className="relative aspect-square overflow-hidden bg-neutral-200 dark:bg-neutral-800 border border-[var(--border-rule)]">
               <img
-                src="/images/sujal-lohar.png"
+                src="/images/sujal-lohar.png?v=20261027"
                 alt="Sujal Lohar, Full-Stack & DevSecOps Engineer"
-                className="w-full h-full object-cover filter contrast-[1.05] grayscale-[0.15]"
+                className="w-full h-full object-cover object-top filter contrast-[1.02]"
                 loading="eager"
               />
               <div className="absolute bottom-0 inset-x-0 bg-neutral-950/85 text-neutral-200 p-2 text-[10px] font-mono flex justify-between items-center">

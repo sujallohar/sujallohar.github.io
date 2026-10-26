@@ -68,12 +68,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     <>
       {/* Mobile Top Header (< 1024px) */}
       <header className="lg:hidden sticky top-0 z-40 bg-[var(--bg-canvas)] border-b border-[var(--border-rule)] px-4 py-3 flex items-center justify-between no-print">
-        <a href="#dispatch" className="flex items-center gap-2 group">
-          <span className="font-serif font-bold text-lg text-[var(--text-primary)]">
-            SL
-          </span>
-          <span className="text-xs font-mono text-[var(--text-secondary)]">
-            // SUJAL LOHAR
+        <a href="#dispatch" className="flex items-center gap-2.5 group">
+          <img src="/favicon.svg" alt="SL Logo" className="w-6 h-6 border border-[var(--border-rule)]" />
+          <span className="text-xs font-mono font-bold text-[var(--text-primary)] tracking-wide">
+            SUJAL LOHAR
           </span>
         </a>
 
@@ -135,20 +133,30 @@ export const Navbar: React.FC<NavbarProps> = ({
       <aside className="hidden lg:flex flex-col w-72 sticky top-0 h-screen border-r border-[var(--border-rule)] bg-[var(--bg-canvas)] p-6 justify-between select-none no-print overflow-y-auto">
         {/* Top: Identity Ledger */}
         <div className="space-y-6">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--accent-terracotta)] font-semibold mb-1">
-              [§ MONOGRAPH INDEX]
+          <div className="space-y-3">
+            <div className="flex items-center gap-2.5">
+              <img src="/favicon.svg" alt="SL Logo" className="w-8 h-8 border border-[var(--border-rule)]" />
+              <div>
+                <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--accent-terracotta)] font-semibold">
+                  [§ MONOGRAPH INDEX]
+                </div>
+                <div className="text-[10.5px] font-mono text-[var(--text-muted)]">
+                  DOC-ID: NU-CSE-2027
+                </div>
+              </div>
             </div>
-            <a href="#dispatch" className="block group">
-              <h1 className="text-xl font-bold font-serif text-[var(--text-primary)] tracking-tight group-hover:text-[var(--accent-terracotta)] transition-colors">
-                {personalInfo.name}
-              </h1>
-            </a>
-            <p className="text-xs font-mono text-[var(--text-secondary)] mt-1 leading-snug">
-              Full-Stack & DevSecOps Engineer
-            </p>
-            <div className="text-[11px] font-mono text-[var(--text-muted)] mt-0.5">
-              Nirma University // CSE '27
+            <div>
+              <a href="#dispatch" className="block group">
+                <h1 className="text-xl font-bold font-serif text-[var(--text-primary)] tracking-tight group-hover:text-[var(--accent-terracotta)] transition-colors">
+                  {personalInfo.name}
+                </h1>
+              </a>
+              <p className="text-xs font-mono text-[var(--text-secondary)] mt-1 leading-snug">
+                Full-Stack & DevSecOps Engineer
+              </p>
+              <div className="text-[11px] font-mono text-[var(--text-muted)] mt-0.5">
+                Nirma University // CSE '27
+              </div>
             </div>
           </div>
 

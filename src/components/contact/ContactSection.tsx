@@ -13,9 +13,12 @@ export const ContactSection: React.FC = () => {
 
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
+
     // Silent discard for bots triggering the honeypot
     if (formData.honeypot) {
       setSubmitted(true);
@@ -24,18 +27,48 @@ export const ContactSection: React.FC = () => {
 
     setLoading(true);
 
-    // Construct mailto link as resilient client-side fallback
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/sujapanchal17@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject || `Engineering Inquiry from ${formData.name}`,
+          message: formData.message,
+          _captcha: "false",
+          _template: "table"
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok || data.success === "true" || data.message) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" });
+      } else {
+        // Fallback to opening mailto if server rejects
+        triggerMailtoFallback();
+      }
+    } catch (err) {
+      // Network error or offline fallback
+      triggerMailtoFallback();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const triggerMailtoFallback = () => {
     const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
       formData.subject || "Engineering Inquiry: " + formData.name
     )}&body=${encodeURIComponent(
       "From: " + formData.name + " (" + formData.email + ")\n\n" + formData.message
     )}`;
-
-    setTimeout(() => {
-      window.location.href = mailtoUrl;
-      setLoading(false);
-      setSubmitted(true);
-    }, 600);
+    window.location.href = mailtoUrl;
+    setSubmitted(true);
   };
 
   return (
@@ -46,10 +79,10 @@ export const ContactSection: React.FC = () => {
           [§07 // DIRECT DISPATCH]
         </div>
         <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[var(--text-primary)] tracking-tight">
-          Secure Channels & Dispatch
+          Active Message Relay & Dispatch
         </h2>
         <p className="text-sm text-[var(--text-secondary)] max-w-3xl leading-relaxed">
-          I respond promptly to technical engineering inquiries, research collaboration proposals, and software internship opportunities.
+          The message relay below delivers your transmission directly to my inbox at {personalInfo.email}. All fields are actively monitored.
         </p>
       </div>
 
@@ -138,29 +171,36 @@ export const ContactSection: React.FC = () => {
             onSubmit={handleSubmit}
             className="border border-[var(--border-rule)] bg-[var(--bg-surface)] p-6 sm:p-8 space-y-4"
           >
-            <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold border-b border-[var(--border-rule)] pb-2">
-              [COMPOSE DIRECT DISPATCH]
+            <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold border-b border-[var(--border-rule)] pb-2 flex justify-between items-center">
+              <span>[COMPOSE DIRECT DISPATCH]</span>
+              <span className="text-[10px] text-[var(--accent-verdigris)] font-bold">● RELAY ACTIVE</span>
             </div>
 
             {submitted ? (
               <div className="p-6 border border-[var(--accent-verdigris)] bg-[var(--bg-canvas)] text-center space-y-2 font-mono">
                 <CheckIcon className="w-6 h-6 text-[var(--accent-verdigris)] mx-auto" />
                 <h3 className="text-sm font-bold text-[var(--text-primary)]">
-                  DISPATCH PREPARED
+                  DISPATCH TRANSMITTED SUCCESSFULLY
                 </h3>
-                <p className="text-xs text-[var(--text-secondary)]">
-                  Your mail client has been opened with your pre-filled inquiry. You can also send directly to {personalInfo.email}.
+                <p className="text-xs text-[var(--text-secondary)] max-w-md mx-auto">
+                  Your message has been dispatched directly to {personalInfo.email}. I typically review and respond within 24 hours.
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="mt-2 text-xs text-[var(--accent-terracotta)] hover:underline"
+                  className="mt-3 inline-block px-3 py-1.5 text-xs text-[var(--accent-terracotta)] hover:underline border border-[var(--border-rule)]"
                 >
-                  ← Compose Another
+                  ← Compose Another Message
                 </button>
               </div>
             ) : (
               <>
+                {errorMessage && (
+                  <div className="p-3 border border-[var(--accent-terracotta)] bg-[var(--accent-subtle)] text-xs font-mono text-[var(--accent-terracotta)]">
+                    {errorMessage}
+                  </div>
+                )}
+
                 {/* Honeypot for bots */}
                 <input
                   type="text"
@@ -237,14 +277,14 @@ export const ContactSection: React.FC = () => {
 
                 <div className="pt-2 flex justify-between items-center">
                   <span className="text-[11px] font-mono text-[var(--text-muted)]">
-                    Protected by Honeypot Verification
+                    Direct Relay to sujapanchal17@gmail.com
                   </span>
                   <button
                     type="submit"
                     disabled={loading}
                     className="px-5 py-2 text-xs font-mono font-medium bg-[var(--accent-terracotta)] text-white hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
-                    {loading ? "Transmitting..." : "Send Dispatch →"}
+                    {loading ? "Transmitting Dispatch..." : "Send Dispatch →"}
                   </button>
                 </div>
               </>

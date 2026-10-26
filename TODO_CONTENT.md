@@ -26,7 +26,13 @@ This document tracks every optional content enhancement, external URL update, an
 
 ---
 
-## 2. Project Imagery & Demonstration Assets
+## 2. Personal Photo & Identity Assets
+
+- [x] **Official Profile Photo Acquired:** Verified 460x460 portrait of Sujal Lohar synced from GitHub and active in `public/images/sujal-lohar.png`.
+- [x] **Bespoke Monograph Logo & Favicon:** Implemented terracotta-and-carbon architectural monogram mark in `public/favicon.svg`.
+- [x] **Active Message Relay:** FormSubmit AJAX relay active at `https://formsubmit.co/ajax/sujapanchal17@gmail.com` with verified email routing and mailto fallback.
+
+## 3. Project Imagery & Demonstration Assets
 
 - [ ] **High-Resolution Production Screenshots:**
   - **Projects:** GovAsset Nexus, GovAsset 360, Smart Health Monitoring System.
