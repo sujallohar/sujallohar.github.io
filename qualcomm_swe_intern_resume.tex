@@ -1,0 +1,151 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Sujal Panchal} \\ \vspace{1pt}
+    \small 123-456-7890 $|$ \href{mailto:your.email@example.com}{\underline{your.email@example.com}} $|$ 
+    \href{https://linkedin.com/in/yourprofile}{\underline{linkedin.com/in/yourprofile}} $|$
+    \href{https://github.com/yourgithub}{\underline{github.com/yourgithub}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Your University Name}{City, State}
+      {Bachelor of Technology in Computer Science Engineering (or ECE)}{Expected Graduation: Month Year}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework:} Data Structures \& Algorithms, Operating Systems, Computer Networks, Object-Oriented Programming, Embedded Systems, Microprocessors.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C, C++, Java, Python, SQL} \\
+     \textbf{Operating Systems}{: Linux/UNIX, Android, Windows, RTOS} \\
+     \textbf{Protocols \& Networks}{: TCP/UDP/IP, SIP, RTP, WiFi, Bluetooth, LTE fundamentals} \\
+     \textbf{Technologies \& Tools}{: Git, Multimedia Codecs (Audio/Video), Embedded Software Development, Shell Scripting, Device Drivers, Kernel debugging} \\
+    }}
+ \end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Mantbyte} $|$ \emph{C++, Linux, Network Protocols} $|$ \href{https://github.com/yourgithub/mantbyte}{\underline{Project Link}}}{Month Year -- Present}
+          \resumeItemListStart
+            \resumeItem{Developed Mantbyte, an advanced software solution tailored for [describe the core functionality, e.g., real-time data processing/network communication].}
+            \resumeItem{Utilized C++ and object-oriented design principles to build a highly scalable and modular architecture.}
+            \resumeItem{Implemented networking protocols (TCP/UDP) for efficient communication between embedded devices.}
+            \resumeItem{Optimized performance in a Linux environment, demonstrating a deep understanding of OS concepts and multi-threading.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Embedded Systems / Linux Kernel Project} $|$ \emph{C, Linux Drivers}}{Month Year -- Month Year}
+          \resumeItemListStart
+            \resumeItem{Developed a Linux device driver for an IOT connected hardware peripheral.}
+            \resumeItem{Gained hands-on experience in Board Support Packages (BSP) and Kernel space programming.}
+          \resumeItemListEnd
+          
+      \resumeProjectHeading
+          {\textbf{Multimedia Processing Engine} $|$ \emph{C++, Multimedia, Android}}{Month Year -- Month Year}
+          \resumeItemListStart
+            \resumeItem{Designed and implemented audio and video processing pipelines for Android-based platforms.}
+            \resumeItem{Enhanced multimedia playback performance by optimizing codec integration.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Software Engineering Intern}{Month Year -- Month Year}
+      {Company Name}{City, State}
+      \resumeItemListStart
+        \resumeItem{Collaborated with cross-functional teams to design and implement software features for embedded devices.}
+        \resumeItem{Debugged complex issues in C/C++ codebases, resulting in a 20\% improvement in system stability.}
+        \resumeItem{Assisted in the development of application UI and underlying software architecture.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------LEADERSHIP \& EXTRACURRICULAR-----------
+\section{Extracurricular Activities}
+  \resumeSubHeadingListStart
+    \resumeSubItem{Strong analytical and problem-solving skills demonstrated through participation in Hackathons/Coding Competitions.}
+    \resumeSubItem{Active member of university technical clubs, promoting teamwork and excellent communication skills.}
+  \resumeSubHeadingListEnd
+
+\end{document}
