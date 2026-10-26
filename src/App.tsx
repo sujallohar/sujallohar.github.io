@@ -32,6 +32,12 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-cyan-500/20 selection:text-cyan-300">
       {/* Top Fixed Header */}
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyan-500 focus:text-slate-950 focus:font-bold focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white text-xs font-mono"
+      >
+        Skip to main content
+      </a>
       <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
 
       {/* Main Content Sections */}
