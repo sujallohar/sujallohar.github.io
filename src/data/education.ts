@@ -9,7 +9,7 @@ export const educationList: Education[] = [
     location: "Ahmedabad, Gujarat, India",
     startDate: "Aug 2023",
     endDate: "May 2027",
-    grade: "8.44 / 10.0 CGPA",
+    grade: "7.94 / 10.0 CGPA",
     details: [
       "Core Coursework: Distributed Systems, Operating Systems, Computer Networks, Data Structures & Algorithms, Database Management Systems, Object-Oriented Programming (Java/C++), Cryptography & Network Security, Cloud Computing.",
       "Recipient: Ministry of External Affairs SPDC Full Scholarship (2023 - 2027).",

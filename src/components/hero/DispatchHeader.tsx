@@ -118,7 +118,7 @@ export const DispatchHeader: React.FC<DispatchHeaderProps> = ({ onOpenResume }) 
           <div className="border border-[var(--border-rule)] bg-[var(--bg-surface)] divide-y divide-[var(--border-rule)] text-xs font-mono">
             <div className="p-2.5 flex justify-between items-center">
               <span className="text-[var(--text-muted)]">ACADEMIC CGPA</span>
-              <span className="text-[var(--text-primary)] font-bold">8.44 / 10.0 (ITNU)</span>
+              <span className="text-[var(--text-primary)] font-bold">7.94 / 10.0 (ITNU)</span>
             </div>
             <div className="p-2.5 flex justify-between items-center">
               <span className="text-[var(--text-muted)]">IEEE / CONFERENCES</span>

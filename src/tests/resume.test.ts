@@ -37,6 +37,6 @@ describe("Resume Variant Data Filters", () => {
   it("contains valid education entries for all variants", () => {
     const edu = educationList.filter(e => e.institution.includes("Nirma"));
     expect(edu.length).toBe(1);
-    expect(edu[0].grade).toBe("8.44 / 10.0 CGPA");
+    expect(edu[0].grade).toBe("7.94 / 10.0 CGPA");
   });
 });
